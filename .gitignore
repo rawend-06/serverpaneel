@@ -4,10 +4,32 @@ node_modules/
 # demo-gegevens op je laptop (worden opnieuw gemaakt bij start-demo)
 demo-data/
 
-# instellingen en gegevens van de echte server
+# instellingen en gegevens van de echte server – NOOIT op GitHub
 .env
+.env.*
+!.env.example
 data/
+*.sqlite
+*.sqlite3
+*.db
+
+# sleutels, certificaten en wachtwoorden – NOOIT op GitHub
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+id_rsa*
+id_ed25519*
+*.kdbx
+*wachtwoord*
+*password*
+*secret*
+url*.txt
 
 # reservekopieën en zips
 *.tar.gz
 *.zip
+
+# eigen woorden voor de geheimencontrole – blijven op je laptop
+.githooks/eigen-woorden.txt

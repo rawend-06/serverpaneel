@@ -1,0 +1,3 @@
+#!/bin/sh
+# Controle vóór elke commit: geen sleutels, wachtwoorden, echte IP-adressen of eigen domeinen.
+exec node "$(git rev-parse --show-toplevel)/.githooks/check-geheimen.js"

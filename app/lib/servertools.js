@@ -37,18 +37,31 @@ module.exports = function servertools(ctx) {
         // ping: kleinste van 5 kleine verzoeken
         const pings = [];
         for (let i = 0; i < 5; i++) { const t = performance.now(); try { const r = await fetch(`${base}/__down?bytes=0`, { cache: 'no-store', signal: AbortSignal.timeout(5000) }); await r.arrayBuffer(); pings.push(performance.now() - t); } catch { /* */ } }
-        // download: 4 x 25 MB tegelijk, max 12 s
+        // download: 8 verbindingen tegelijk, 10 seconden lang. De eerste 1,5 s (opstarten) telt niet mee,
+        // anders meet je op een snelle lijn vooral de opstarttijd en lijkt je internet trager dan het is.
         const dl = async () => {
-          const t = performance.now(); let bytes = 0;
-          await Promise.all([0, 1, 2, 3].map(async () => {
-            try { const r = await fetch(`${base}/__down?bytes=25000000`, { cache: 'no-store', signal: AbortSignal.timeout(12000) }); for await (const c of r.body) bytes += c.length; } catch { /* timeout = genoeg gemeten */ }
+          const stop = new AbortController(); const t0 = performance.now(); const WARM = 1500, DUR = 10000;
+          let counted = 0, tStart = null;
+          const timer = setTimeout(() => stop.abort(), DUR);
+          await Promise.all(Array.from({ length: 8 }, async () => {
+            while (!stop.signal.aborted) {
+              try {
+                const r = await fetch(`${base}/__down?bytes=100000000`, { cache: 'no-store', signal: stop.signal });
+                for await (const c of r.body) { const now = performance.now(); if (now - t0 >= WARM) { if (tStart == null) tStart = now; counted += c.length; } }
+              } catch { break; }
+            }
           }));
-          return (bytes * 8) / ((performance.now() - t) / 1000);
+          clearTimeout(timer);
+          const secs = tStart == null ? 0 : (performance.now() - tStart) / 1000;
+          return secs > 0.5 ? (counted * 8) / secs : 0;
         };
+        // upload: 4 verbindingen tegelijk, telkens 10 MB, 8 seconden lang
         const ul = async () => {
-          const chunk = Buffer.alloc(8e6, 'a'); const t = performance.now(); let bytes = 0;
-          await Promise.all([0, 1].map(async () => { try { await fetch(`${base}/__up`, { method: 'POST', body: chunk, signal: AbortSignal.timeout(15000) }); bytes += chunk.length; } catch { /* */ } }));
-          return (bytes * 8) / ((performance.now() - t) / 1000);
+          const chunk = Buffer.alloc(10e6, 'a'); const t0 = performance.now(); let bytes = 0;
+          await Promise.all(Array.from({ length: 4 }, async () => {
+            while (performance.now() - t0 < 8000) { try { await fetch(`${base}/__up`, { method: 'POST', body: chunk, signal: AbortSignal.timeout(15000) }); bytes += chunk.length; } catch { break; } }
+          }));
+          return (bytes * 8) / ((performance.now() - t0) / 1000);
         };
         const down = await dl(); const up = await ul();
         if (!down && !up) throw bad('De snelheidstest lukte niet (geen internet?)');

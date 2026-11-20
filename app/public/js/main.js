@@ -11,18 +11,18 @@ export const app = { me: null, settings: null, overview: null, version: VERSION,
 const ROUTES = {
   '': ['dashboard', 'Dashboard'], agenda: ['agenda', 'Agenda'], morgen: ['morgen', 'Morgen klaarleggen'], taken: ['tasks', 'Taken'], notities: ['notes', 'Notities'],
   delen: ['share', 'Delen'], aftellen: ['countdowns', 'Aftellen'],
-  sites: ['sites', 'Websites'], server: ['server', 'Server'], containers: ['containers', 'Containers'], terminal: ['terminal', 'Terminal'], bestanden: ['files', 'Bestanden'], apps: ['apps', 'Apps-winkel'], databases: ['databases', 'Databases'], firewall: ['firewall', 'Firewall'], apparaten: ['devices', 'Apparaten'], energie: ['energy', 'Energie'], instellingen: ['settings', 'Instellingen'], meer: ['more', 'Meer'],
+  sites: ['sites', 'Websites'], server: ['server', 'Server'], containers: ['containers', 'Containers'], terminal: ['terminal', 'Terminal'], bestanden: ['files', 'Bestanden'], apps: ['apps', 'Apps-winkel'], databases: ['databases', 'Databases'], firewall: ['firewall', 'Firewall'], apparaten: ['devices', 'Apparaten'], netwerk: ['network', 'Netwerk'], energie: ['energy', 'Energie'], instellingen: ['settings', 'Instellingen'], meer: ['more', 'Meer'],
 };
 const NAV = [
   ['', 'home', 'Dashboard'], ['agenda', 'cal', 'Agenda'], ['taken', 'tasks', 'Taken'], ['notities', 'note', 'Notities'], ['delen', 'clip', 'Delen'],
   '-', ['sites', 'globe', 'Websites'], ['apps', 'bag', 'Apps-winkel'], ['databases', 'disk', 'Databases'], ['server', 'server', 'Server'], ['containers', 'box', 'Containers'], ['terminal', 'terminal', 'Terminal'], ['bestanden', 'folder', 'Bestanden'],
-  '-', ['firewall', 'shield', 'Firewall'], ['apparaten', 'wifi', 'Apparaten'], ['energie', 'bolt', 'Energie'],
+  '-', ['netwerk', 'wifi', 'Netwerk'], ['firewall', 'shield', 'Firewall'], ['apparaten', 'wifi', 'Apparaten'], ['energie', 'bolt', 'Energie'],
   '-', ['instellingen', 'sliders', 'Instellingen'],
 ];
-const TOP = [['', 'home', 'Overzicht'], ['sites', 'globe', 'Websites'], ['server', 'server', 'Server'], ['terminal', 'terminal', 'Terminal'], ['agenda', 'cal', 'Agenda'], ['taken', 'tasks', 'Taken']];
+const TOP = [['', 'home', 'Overzicht'], ['sites', 'globe', 'Websites'], ['server', 'server', 'Server'], ['netwerk', 'wifi', 'Netwerk'], ['terminal', 'terminal', 'Terminal'], ['agenda', 'cal', 'Agenda'], ['taken', 'tasks', 'Taken']];
 const TOPKEYS = new Set(TOP.map((t) => t[0]));
 const BNAV = [['', 'home', 'Home'], ['agenda', 'cal', 'Agenda'], ['taken', 'tasks', 'Taken'], ['sites', 'globe', 'Sites'], ['meer', 'menu', 'Meer']];
-const MORE = new Set(['notities', 'delen', 'aftellen', 'server', 'containers', 'terminal', 'bestanden', 'apps', 'databases', 'firewall', 'apparaten', 'energie', 'instellingen', 'meer', 'morgen']);
+const MORE = new Set(['notities', 'delen', 'aftellen', 'server', 'containers', 'terminal', 'bestanden', 'apps', 'databases', 'firewall', 'apparaten', 'energie', 'netwerk', 'instellingen', 'meer', 'morgen']);
 
 function parseHash() {
   const raw = location.hash.replace(/^#\/?/, '');

@@ -684,6 +684,7 @@ ctx.hosttools = require('./lib/hosttools')(ctx);
 ctx.apps = require('./lib/apps')(ctx);
 ctx.databases = require('./lib/databases')(ctx);
 ctx.search = require('./lib/search')(ctx);
+ctx.network = require('./lib/network')(ctx);
 ctxReady = true;
 ctx.calendar.early(app);
 ctx.personal.early(app);
@@ -1553,7 +1554,7 @@ app.get('/api/sites/:name/logs/stream', (req, res) => {
 });
 
 // ---- routes van de onderdelen (allemaal achter inloggen)
-for (const m of ['calendar', 'personal', 'notify', 'servertools', 'security', 'terminal', 'files', 'hosttools', 'apps', 'databases', 'search']) ctx[m].routes(app);
+for (const m of ['calendar', 'personal', 'notify', 'servertools', 'security', 'terminal', 'files', 'hosttools', 'apps', 'databases', 'search', 'network']) ctx[m].routes(app);
 
 // multer/andere fouten netjes als JSON
 app.use((err, req, res, next) => {
