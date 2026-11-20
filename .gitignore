@@ -30,3 +30,6 @@ url*.txt
 # reservekopieën en zips
 *.tar.gz
 *.zip
+
+# eigen woorden voor de geheimencontrole – blijven op je laptop
+.githooks/eigen-woorden.txt
