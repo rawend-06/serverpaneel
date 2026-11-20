@@ -1,0 +1,28 @@
+# Rawendpaneel - waarden komen uit .env (gemaakt door install.sh)
+services:
+  serverpaneel:
+    build: .
+    image: serverpaneel:latest
+    container_name: serverpaneel
+    restart: unless-stopped
+    user: "${PUID}:${PGID}"
+    group_add:
+      - "${DOCKER_GID}"
+    ports:
+      - "${PANEL_PORT:-3000}:3000"
+    env_file: .env
+    environment:
+      - PORT=3000
+      - DATA_DIR=/data
+      - HOME=/data
+      - HOST_ROOT=/hostfs
+      - HOST_USER=${HOST_USER:-rawend}
+    volumes:
+      - ./data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+      # je home-map op exact hetzelfde pad, zodat docker compose van je apps gewoon werkt
+      - ${HOME_DIR}:${HOME_DIR}
+      # map met de door het paneel gemaakte Caddy-instellingen
+      - ${CADDY_SITES_DIR:-./caddy}:${CADDY_SITES_DIR:-/caddy}
+      # je server (alleen lezen) voor de metingen: schijven, netwerk, temperatuur
+      - /:/hostfs:ro,rslave

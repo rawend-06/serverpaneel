@@ -1,0 +1,13 @@
+# afhankelijkheden (worden op de server zelf geïnstalleerd)
+node_modules/
+
+# demo-gegevens op je laptop (worden opnieuw gemaakt bij start-demo)
+demo-data/
+
+# instellingen en gegevens van de echte server
+.env
+data/
+
+# reservekopieën en zips
+*.tar.gz
+*.zip

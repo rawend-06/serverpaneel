@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "demo",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd app && set DEMO=1&& set PORT=3010&& node server.js"],
+      "port": 3010
+    }
+  ]
+}

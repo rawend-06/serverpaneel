@@ -1,0 +1,4 @@
+# Alles met Linux-regeleindes, zodat install.sh en de code op de server blijven werken
+* text=auto eol=lf
+*.png binary
+*.woff2 binary
