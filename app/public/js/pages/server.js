@@ -228,10 +228,10 @@ function maintTab(body) {
   async function speed(entry) {
     let d; try { d = await api('GET', '/api/server/speedtest'); } catch (e) { spEl.innerHTML = `<p class="error">${esc(e.message)}</p>`; return; }
     const lastR = entry || (d.history || [])[d.history.length - 1];
-    const mb = (b) => (b / 1e6).toFixed(b < 1e8 ? 1 : 0).replace('.', ',');
-    spEl.innerHTML = `<div class="speed"><div><small>Download</small><b>${lastR ? mb(lastR.down) : '–'}</b> <span>Mbit/s</span></div><div><small>Upload</small><b>${lastR ? mb(lastR.up) : '–'}</b> <span>Mbit/s</span></div><div><small>Ping</small><b>${lastR && lastR.ping != null ? Math.round(lastR.ping) : '–'}</b> <span>ms</span></div></div>
+    const mb = (b) => (b / 8e6).toFixed(1).replace('.', ','); // bits/s → MB/s
+    spEl.innerHTML = `<div class="speed"><div><small>Download</small><b>${lastR ? mb(lastR.down) : '–'}</b> <span>MB/s</span></div><div><small>Upload</small><b>${lastR ? mb(lastR.up) : '–'}</b> <span>MB/s</span></div><div><small>Ping</small><b>${lastR && lastR.ping != null ? Math.round(lastR.ping) : '–'}</b> <span>ms</span></div></div>
       <div class="row" style="margin-top:12px"><span class="faint small grow">${lastR ? `Laatste test ${esc(ago(lastR.at))}` : 'Nog niet getest'}</span><button class="btn pri" data-dospeed ${d.busy ? 'disabled' : ''}>${d.busy ? '<span class="spinner"></span>Bezig…' : `${icon('play', 'sm')}Test starten`}</button></div>
-      ${(d.history || []).length > 2 ? `<div class="bars" style="height:70px">${d.history.slice(-12).map((h) => `<div class="bc" title="${mb(h.down)} Mbit/s · ${esc(ago(h.at))}"><i style="height:${(h.down / Math.max(...d.history.slice(-12).map((x) => x.down))) * 100}%"></i></div>`).join('')}</div>` : ''}`;
+      ${(d.history || []).length > 2 ? `<div class="bars" style="height:70px">${d.history.slice(-12).map((h) => `<div class="bc" title="${mb(h.down)} MB/s · ${esc(ago(h.at))}"><i style="height:${(h.down / Math.max(...d.history.slice(-12).map((x) => x.down))) * 100}%"></i></div>`).join('')}</div>` : ''}`;
   }
   async function oc() {
     try { const o = await api('GET', '/api/server/opencloud');

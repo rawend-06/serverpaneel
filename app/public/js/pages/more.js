@@ -5,7 +5,7 @@ import * as Live from '../live.js';
 const TILES = [
   ['notities', 'note', 'Notities', '', 's'], ['sites', 'globe', 'Websites', 'data-sites', ''], ['delen', 'clip', 'Delen', 'klembord', 's'],
   ['aftellen', 'flag', 'Aftellen', 'data-cd', ''], ['morgen', 'bag', 'Morgen', 'klaarleggen', 's'],
-  ['server', 'server', 'Server', 'data-srv', 's'], ['containers', 'box', 'Containers', 'data-cnt', ''], ['terminal', 'terminal', 'Terminal', 'ook onderweg', 's'], ['bestanden', 'folder', 'Bestanden', 'op je server', ''], ['apps', 'bag', 'Apps-winkel', '1 klik', 's'], ['databases', 'disk', 'Databases', '', ''], ['firewall', 'shield', 'Firewall', 'poorten', 's'], ['apparaten', 'wifi', 'Apparaten', 'Wake-on-LAN', ''], ['energie', 'bolt', 'Energie', 'verbruik', 's'], ['instellingen', 'sliders', 'Instellingen', '', 's'],
+  ['server', 'server', 'Server', 'data-srv', 's'], ['containers', 'box', 'Containers', 'data-cnt', ''], ['terminal', 'terminal', 'Terminal', 'ook onderweg', 's'], ['bestanden', 'folder', 'Bestanden', 'op je server', ''], ['apps', 'bag', 'Apps-winkel', '1 klik', 's'], ['databases', 'disk', 'Databases', '', ''], ['netwerk', 'wifi', 'Netwerk', 'MB/s + wie is er', ''], ['firewall', 'shield', 'Firewall', 'poorten', 's'], ['apparaten', 'wifi', 'Apparaten', 'Wake-on-LAN', ''], ['energie', 'bolt', 'Energie', 'verbruik', 's'], ['instellingen', 'sliders', 'Instellingen', '', 's'],
 ];
 
 export default async function more(root, ctx) {

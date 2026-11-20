@@ -1,7 +1,7 @@
 # Rawendpaneel
 
 Je eigen paneel op je eigen server. Je opent het in je browser of als app op je gsm, thuis of onderweg.
-Drie blauwtinten (diepblauw, helderblauw, ijsblauw), compact, licht of donker zoals je toestel, en volledig gemaakt voor de gsm.
+Wit, blauw en koraal, met je server als **levende kern** in het midden van het overzicht. Licht of donker zoals je toestel, en volledig gemaakt voor de gsm.
 
 ## Wat kan het?
 
@@ -44,6 +44,10 @@ Drie blauwtinten (diepblauw, helderblauw, ijsblauw), compact, licht of donker zo
 - **Apparaten**: wie er op je netwerk zit (melding bij een nieuw apparaat) en computers aanzetten met Wake-on-LAN.
 - **Energie**: verbruik nu, per dag/week/maand/jaar en wat het kost. Geschat via de processor, of exact met een
   Shelly- of Tasmota-stekker.
+- **Netwerk**: alle snelheden in **MB/s** (1 MB/s = 8 Mbit/s). Snelheidstest met 8 verbindingen tegelijk (± 20 s),
+  de snelheid van je kabel (bv. 1 Gbit/s = max 125 MB/s), fouten op de kabel, DNS, en **wie er op je netwerk zit met een naam**:
+  de naam die het toestel zelf doorgeeft, de Windows-naam, de naam van je router of het merk (officiële IEEE-lijst, één keer
+  gedownload). Onbekende apparaten geef je zelf een naam.
 - **Zoeken overal** (`Ctrl K`): sites, containers, databases, bestanden, notities en acties in één zoekvak.
   Typ `>` voor enkel acties. Gewoon iets typen en Enter kan ook nog altijd als *Snel toevoegen*.
 - **Beveiliging**: wachtwoord, 2FA, **Face ID / vingerafdruk**, en voor gevaarlijke dingen (terminal, herstarten,
