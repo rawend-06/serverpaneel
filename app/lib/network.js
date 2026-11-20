@@ -32,9 +32,13 @@ module.exports = function network(ctx) {
         rxErrors: stat('rx_errors'), txErrors: stat('tx_errors'), drops: stat('rx_dropped') + stat('tx_dropped') };
     }).sort((a, b) => b.up - a.up || (b.speed || 0) - (a.speed || 0));
   }
+  // hoe snel sites opgezocht worden (eerst rechtstreeks bij de DNS-server, anders via het besturingssysteem)
   async function dnsMs() {
-    const t = performance.now();
-    try { await dns.resolve4(`check-${Date.now() % 100000}.cloudflare.com`).catch(() => dns.resolve4('cloudflare.com')); return Math.round(performance.now() - t); } catch { return null; }
+    for (const ask of [() => dns.resolve4('cloudflare.com'), () => dns.lookup('cloudflare.com')]) {
+      const t = performance.now();
+      try { await ask(); return Math.round(performance.now() - t); } catch { /* volgende manier proberen */ }
+    }
+    return null;
   }
 
   // ------------------------------------------------------------ merk uit het MAC-adres (IEEE-lijst)
